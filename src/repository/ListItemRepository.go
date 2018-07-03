@@ -2,22 +2,25 @@ package repository
 
 import (
 	"../model"
+	"../config"
+	"gopkg.in/gorethink/gorethink.v4"
+	"log"
 )
 type ListItemRepository struct{}
 
 func (r *ListItemRepository) GetItems() model.ListItems{
-	return model.ListItems{
-		model.ListItem{
-			"1",
-			"Milk",
-			1,
-			"false",
-		},
-		model.ListItem{
-			"2",
-			"Something",
-			4,
-			"false",
-		},
+	items := model.ListItems{}
+
+	res, err := gorethink.Table("shoppingList").Run(config.RethinkSession())
+	if err != nil {
+		log.Fatal(err.Error())
 	}
+	err = res.All(&items)
+	if err != nil{
+		log.Fatal(err.Error())
+	}
+
+	defer res.Close()
+	return items
 }
+
