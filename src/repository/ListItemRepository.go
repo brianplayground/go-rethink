@@ -39,11 +39,23 @@ func (r *ListItemRepository) InsertItem(product string, quantity int) *model.Lis
 	return item
 }
 
-func (r *ListItemRepository) UpdateItem(id, product string, quantity int)  {
-
+func (r *ListItemRepository) UpdateItem(id string,item model.ListItem) bool{
+	item.Updated = time.Now()
+	item.Status = "false"
+	res, err := gorethink.Table(tableName).Get(id).Update(item).Run(config.RethinkSession())
+	if err != nil{
+		log.Fatal(err.Error())
+	}
+	res.Close()
+	return true
 }
 
 func (r *ListItemRepository) GetItemById(id string) []model.ListItem{
+	item := FindById(id)
+	return item
+}
+
+func FindById(id string) []model.ListItem {
 	item := []model.ListItem{}
 	res, err := gorethink.Table(tableName).Get(id).Run(config.RethinkSession())
 	if err != nil{

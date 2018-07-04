@@ -56,6 +56,9 @@ func (c *Controller) Insert(w http.ResponseWriter, r *http.Request){
 
 func (c *Controller) Update(w http.ResponseWriter, r *http.Request){
 	var i model.ListItem
+	params := mux.Vars(r)
+	id := params["id"]
+
 	if r.Body == nil{
 		http.Error(w, "Please send a request body", 400)
 		return
@@ -65,5 +68,7 @@ func (c *Controller) Update(w http.ResponseWriter, r *http.Request){
 		http.Error(w, err.Error(), 400)
 		return
 	}
+
+	c.Repository.UpdateItem(id,i)
 
 }

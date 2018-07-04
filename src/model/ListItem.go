@@ -8,6 +8,7 @@ type ListItem struct {
 	Quantity int
 	Status string
 	Created time.Time
+	Updated time.Time
 }
 
 func (I *ListItem) Bought() bool {
