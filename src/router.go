@@ -31,6 +31,12 @@ var routes = Routes{
 		"/",
 		c.Insert,
 	},
+	Route{
+		"FindById",
+		"GET",
+		"/{id}",
+		c.FindById,
+	},
 }
 
 func NewRouter() *mux.Router{
