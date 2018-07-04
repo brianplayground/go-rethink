@@ -55,6 +55,17 @@ func (r *ListItemRepository) GetItemById(id string) []model.ListItem{
 	return item
 }
 
+func (r *ListItemRepository) DeleteItem(id string) bool{
+	res, err := gorethink.Table(tableName).Get(id).Delete().Run(config.RethinkSession())
+
+	if err != nil{
+		log.Fatal(err.Error())
+		return false
+	}
+	res.Close()
+	return true
+}
+
 func FindById(id string) []model.ListItem {
 	item := []model.ListItem{}
 	res, err := gorethink.Table(tableName).Get(id).Run(config.RethinkSession())

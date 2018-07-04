@@ -72,3 +72,10 @@ func (c *Controller) Update(w http.ResponseWriter, r *http.Request){
 	c.Repository.UpdateItem(id,i)
 
 }
+
+func (c *Controller) Delete(w http.ResponseWriter, r *http.Request){
+	params := mux.Vars(r)
+	id := params["id"]
+
+	c.Repository.DeleteItem(id)
+}

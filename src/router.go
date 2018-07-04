@@ -43,6 +43,12 @@ var routes = Routes{
 		"/{id}",
 		c.Update,
 	},
+	Route{
+		"Delete",
+		"DELETE",
+		"/{id}",
+		c.Delete,
+	},
 }
 
 func NewRouter() *mux.Router{
