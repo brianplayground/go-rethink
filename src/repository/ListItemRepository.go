@@ -13,7 +13,6 @@ var tableName = "shoppingList"
 
 func (r *ListItemRepository) GetItems() model.ListItems{
 	items := model.ListItems{}
-
 	res, err := gorethink.Table(tableName).Run(config.RethinkSession())
 	if err != nil {
 		log.Fatal(err.Error())
@@ -30,7 +29,6 @@ func (r *ListItemRepository) GetItems() model.ListItems{
 func (r *ListItemRepository) InsertItem(product string, quantity int) *model.ListItem{
 	item := model.NewItem(product,quantity)
 	item.Created = time.Now()
-
 	res , err := gorethink.Table(tableName).Insert(item).Run(config.RethinkSession())
 	if err != nil{
 		log.Fatal(err.Error())

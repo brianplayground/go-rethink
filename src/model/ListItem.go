@@ -4,11 +4,11 @@ import "time"
 
 type ListItem struct {
 	Id string `gorethink:"id,omitempty"`
-	Product string
-	Quantity int
-	Status string
-	Created time.Time
-	Updated time.Time
+	Product string `gorethink:"product"`
+	Quantity int `gorethink:"quantity"`
+	Status string `gorethink:"status"`
+	Created time.Time `gorethink:"created_at"`
+	Updated time.Time `gorethink:"updated_at"`
 }
 
 func (I *ListItem) Bought() bool {
