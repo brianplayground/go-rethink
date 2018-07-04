@@ -25,6 +25,12 @@ var routes = Routes{
 		"/",
 		c.Index,
 	},
+	Route{
+		"Insert",
+		"POST",
+		"/",
+		c.Insert,
+	},
 }
 
 func NewRouter() *mux.Router{

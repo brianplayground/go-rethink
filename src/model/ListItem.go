@@ -1,10 +1,13 @@
 package model
 
+import "time"
+
 type ListItem struct {
-	ID string
+	Id string `gorethink:"id,omitempty"`
 	Product string
 	Quantity int
 	Status string
+	Created time.Time
 }
 
 func (I *ListItem) Bought() bool {
